@@ -10,5 +10,14 @@ export class Suburb {
     public medianAge: number,
     public ancestry: any[] = [],
     public countryOfBirth: any[] = [],
+    public religion: any[] = [],
+    public laborForce: any[] = [],
+    public employmentStatus: any[] = [],
+    public occupation: any[] = [],
+    public industry: any[] = [],
+    public medianWeeklyIncome: any[] = [],
+    public methodOfTravelToWork: any[] = [],
+    public familyComposition: any[] = [],
+    public employmentStatusOfCoupleFamilies: any[] = []
   ) {}
 }

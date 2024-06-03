@@ -1,6 +1,6 @@
 import { Page } from 'puppeteer'
 import { Suburb } from '../models';
-import { getAncestry, getCountryOfBirth, getFamilies, getMedianAge, getMedianIncome, getMedianMortgage, getMedianRent, getPopulation } from './getters';
+import { getAncestry, getCountryOfBirth, getEmploymentStatus, getEmploymentStatusOfCoupleFamilies, getFamilies, getFamilyComposition, getIndustry, getLaborForce, getMedianAge, getMedianIncome, getMedianMortgage, getMedianRent, getMedianWeeklyIncome, getMethodOfTravelToWork, getOccupation, getPopulation, getReligion } from './getters';
 
 export const getSuburbData = async (page: Page, url: string, areacode: string) => {
   // Navigate the page to a URL
@@ -28,6 +28,15 @@ export const getSuburbData = async (page: Page, url: string, areacode: string) =
   const medianAge = await getMedianAge(page)
   const ancestry = await getAncestry(page)
   const countryOfBirth = await getCountryOfBirth(page)
+  const religion = await getReligion(page)
+  const laborForce = await getLaborForce(page)
+  const employmentStatus = await getEmploymentStatus(page)
+  const occupation = await getOccupation(page)
+  const industry = await getIndustry(page)
+  const medianWeeklyIncome = await getMedianWeeklyIncome(page)
+  const methodOfTravelToWork = await getMethodOfTravelToWork(page)
+  const familyComposition = await getFamilyComposition(page)
+  const employmentStatusOfCoupleFamilies = await getEmploymentStatusOfCoupleFamilies(page)
 
   const suburb = new Suburb(
     areacode,
@@ -40,6 +49,15 @@ export const getSuburbData = async (page: Page, url: string, areacode: string) =
     medianAge,
     ancestry,
     countryOfBirth,
+    religion,
+    laborForce,
+    employmentStatus,
+    occupation,
+    industry,
+    medianWeeklyIncome,
+    methodOfTravelToWork,
+    familyComposition,
+    employmentStatusOfCoupleFamilies,
   )
 
   return suburb

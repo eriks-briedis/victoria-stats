@@ -3,7 +3,7 @@ export const formatCurrency = (value: string | null | undefined) => {
 }
 
 export const formatNumber = (value: string | null | undefined) => {
-  const val = parseInt((value || '').trim().replace(',', ''), 10)
+  const val = parseInt((value || '').trim().replace('$', '').replace(',', ''), 10)
 
   return isNaN(val) ? 0 : val
 }

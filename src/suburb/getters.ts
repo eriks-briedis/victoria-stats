@@ -1,5 +1,5 @@
 import { Page } from 'puppeteer'
-import { formatCurrency, formatNumber, formatPercentage, getElementContent } from '../utils'
+import { formatCurrency, formatNumber, formatPercentage, getElementContent, getTableData } from '../utils'
 
 export const getPopulation = async (page: Page) => {
   const population = await getElementContent(page, '#summary-container .qsPeople .strongRow td')
@@ -60,55 +60,75 @@ export const getAncestry = async (page: Page) => {
 }
 
 export const getCountryOfBirth = async (page: Page) => {
-  const countryOfBirth: any[] = []
+  const countryOfBirth = await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(4) .qsTable:nth-child(3) tr`
+  )
 
-  const rows = (await page.$$(`#tablesView .abs-collapsible-paragraph:nth-child(4) .qsTable:nth-child(3) tr`))
-  rows.shift()
-
-  for (const row of rows) {
-    const data = {
-      country: '',
-      total: 0,
-      percentage: 0,
-    }
-    const head = await row.$('th')
-    const country = await head?.evaluate((el) => el.textContent)
-
-    data.country = country || ''
-
-    const cells = await row.$$('td')
-
-    for (let i = 0; i < cells.length; i++) {
-      if (i >= 2) {
-        break
-      }
-
-      const cell = cells[i]
-      const content = await cell.evaluate((el) => el.textContent)
-      if (i === 0) {
-        data.total = formatNumber(content)
-      }
-
-      if (i === 1) {
-        data.percentage = formatPercentage(content)
-      }
-    }
-
-    countryOfBirth.push(data)
-  }
-
-  return countryOfBirth
+  return countryOfBirth.filter((_, i) => i !== 1)
 }
 
 export const getReligion = async (page: Page) => {
-  const religion: any[] = []
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(4) .qsTable:nth-child(11) tr`
+  )
+}
 
-  const rows = (await page.$$(`#tablesView .abs-collapsible-paragraph:nth-child(4) .qsTable:nth-child(4) tr`))
-  rows.shift()
+export const getLaborForce = async (page: Page) => {
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(5) .qsTable:nth-child(1) tr`
+  )
+}
 
-  for (const row of rows) {
+export const getEmploymentStatus = async (page: Page) => {
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(5) .qsTable:nth-child(3) tr`
+  )
+}
 
-  }
+export const getOccupation = async (page: Page) => {
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(5) .qsTable:nth-child(7) tr`
+  )
+}
 
-  return religion
+export const getIndustry = async (page: Page) => {
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(5) .qsTable:nth-child(9) tr`
+  )
+}
+
+export const getMedianWeeklyIncome = async (page: Page) => {
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(5) .qsTable:nth-child(11) tr`,
+    1,
+    'currency',
+  )
+}
+
+export const getMethodOfTravelToWork = async (page: Page) => {
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(5) .qsTable:nth-child(13) tr`
+  )
+}
+
+export const getFamilyComposition = async (page: Page) => {
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(9) .qsTable:nth-child(1) tr`
+  )
+}
+
+export const getEmploymentStatusOfCoupleFamilies = async (page: Page) => {
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(9) .qsTable:nth-child(5) tr`
+  )
 }
