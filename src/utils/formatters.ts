@@ -3,11 +3,13 @@ export const formatCurrency = (value: string | null | undefined) => {
 }
 
 export const formatNumber = (value: string | null | undefined) => {
-  const val = parseInt((value || '').trim().replace('$', '').replace(',', ''), 10)
+  const val = parseFloat((value || '').trim().replace('$', '').replace(',', ''))
 
   return isNaN(val) ? 0 : val
 }
 
 export const formatPercentage = (value: string | null | undefined) => {
-  return parseFloat((value || ''))
+  const val = parseFloat((value || ''))
+
+  return isNaN(val) ? 0 : val
 }

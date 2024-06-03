@@ -18,6 +18,15 @@ export class Suburb {
     public medianWeeklyIncome: any[] = [],
     public methodOfTravelToWork: any[] = [],
     public familyComposition: any[] = [],
-    public employmentStatusOfCoupleFamilies: any[] = []
+    public employmentStatusOfCoupleFamilies: any[] = [],
+    public dwellingCount: any[] = [],
+    public dwellingStructure: any[] = [],
+    public numberOfBedrooms: any[] = [],
+    public numberOfVehicles: any[] = [],
+    public householdComposition: any[] = [],
+    public tenureType: any[] = [],
+    public householdIncome: any[] = [],
+    public rentWeeklyPayment: any[] = [],
+    public mortgageMonthlyPayment: any[] = [],
   ) {}
 }

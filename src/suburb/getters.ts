@@ -113,10 +113,12 @@ export const getMedianWeeklyIncome = async (page: Page) => {
 }
 
 export const getMethodOfTravelToWork = async (page: Page) => {
-  return await getTableData(
+  const data = await getTableData(
     page,
     `#tablesView .abs-collapsible-paragraph:nth-child(5) .qsTable:nth-child(13) tr`
   )
+
+  return data.filter((_, i) => i !== 5 && i !== 8)
 }
 
 export const getFamilyComposition = async (page: Page) => {
@@ -131,4 +133,79 @@ export const getEmploymentStatusOfCoupleFamilies = async (page: Page) => {
     page,
     `#tablesView .abs-collapsible-paragraph:nth-child(9) .qsTable:nth-child(5) tr`
   )
+}
+
+export const getDwellingCount = async (page: Page) => {
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(10) .qsTable:nth-child(1) tr`
+  )
+}
+
+export const getDwellingStructure = async (page: Page) => {
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(10) .qsTable:nth-child(3) tr`
+  )
+}
+
+export const getNumberOfBedrooms = async (page: Page) => {
+  const data = await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(10) .qsTable:nth-child(5) tr`
+  )
+
+  return data.filter((_, i) => i !== 6)
+}
+
+export const getNumberOfVehicles = async (page: Page) => {
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(10) .qsTable:nth-child(7) tr`
+  )
+}
+
+export const getHouseholdComposition = async (page: Page) => {
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(11) .qsTable:nth-child(1) tr`
+  )
+}
+
+export const getTenureType = async (page: Page) => {
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(11) .qsTable:nth-child(3) tr`
+  )
+}
+
+export const getHouseholdIncome = async (page: Page) => {
+  return await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(11) .qsTable:nth-child(5) tr`,
+    2,
+    'currency',
+  )
+}
+
+export const getRentWeeklyPayment = async (page: Page) => {
+  const data = await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(11) .qsTable:nth-child(8) tr`,
+    2,
+    'currency',
+  )
+
+  return data.filter((_, i) => i !== 1)
+}
+
+export const getMortgageMonthlyPayment = async (page: Page) => {
+  const data = await getTableData(
+    page,
+    `#tablesView .abs-collapsible-paragraph:nth-child(11) .qsTable:nth-child(10) tr`,
+    2,
+    'currency',
+  )
+
+  return data.filter((_, i) => i !== 1)
 }
