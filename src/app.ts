@@ -3,7 +3,10 @@ import { getSuburbData } from './suburb';
 
 export const App = async () => {
   // Launch the browser and open a new blank page
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    ignoreDefaultArgs: ['--disable-extensions'],
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
   const page = await browser.newPage();
   const BASE_URL = 'https://www.abs.gov.au/census/find-census-data/quickstats/2021/SAL'
   const FIRST = 20002
